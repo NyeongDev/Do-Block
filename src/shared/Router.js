@@ -1,39 +1,11 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { RefreshToken } from "../components";
-// import {
-// 	ProfilePage,
-// 	SignInPage,
-// 	SignUpPage,
-// 	TodoListPage,
-// 	AddFeedPage,
-// 	ProfileEditPage,
-// 	PasswordChangePage,
-// 	FollowingPage,
-// 	FollowerPage,
-// 	DetailFeedPage,
-// 	FollowingFeedListPage,
-// 	RecommendedFeedListPage,
-// 	FeedPage,
-// 	InterestTagsPage,
-// 	MyBadgesPage,
-// 	BadgeSetiingPage,
-// 	ReactionListPage,
-// 	MyFeedPage,
-// } from "../pages";
-// import EditFeedPage from "../pages/feed/EditFeedPage";
-// import EmailSignIn from "../pages/join/EmailSignIn";
-// import GoogleLogin from "../pages/join/GoogleLogin";
-// import KakaoLogin from "../pages/join/KakaoLogin";
-// import NaverLogin from "../pages/join/NaverLogin";
-// import SearchPage from "../pages/search/SearchPage";
-import PrivateRoute from "./PrivateRoute";
 import Lottie from "lottie-react";
 import spinner from "../common/gif/spinner.json";
 import { Flex } from "../common";
+import SignInPage from "../pages/join/SignInPage";
 
 const ProfilePage = lazy(() => import("../pages/profile/ProfilePage"));
-const SignInPage = lazy(() => import("../pages/join/SignInPage"));
 const SignUpPage = lazy(() => import("../pages/join/SignUpPage"));
 const TodoListPage = lazy(() => import("../pages/todoList/TodoListPage"));
 const AddFeedPage = lazy(() => import("../pages/feed/AddFeedPage"));
@@ -85,142 +57,34 @@ const Router = () => {
 						<Route path="/api/members/login/kakao" element={<KakaoLogin />} />
 						<Route path="/api/members/login/naver" element={<NaverLogin />} />
 						<Route path="/api/members/login/google" element={<GoogleLogin />} />
+						<Route path="profile/:id" element={<ProfilePage />} />
+						<Route path="profile/edit" element={<ProfileEditPage />} />
 						<Route
-							path="/*"
-							element={
-								<PrivateRoute>
-									<RefreshToken />
-								</PrivateRoute>
-							}
-						>
-							<Route
-								path="profile/:id"
-								element={
-									<PrivateRoute>
-										<ProfilePage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/edit"
-								element={
-									<PrivateRoute>
-										<ProfileEditPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/edit/password"
-								element={
-									<PrivateRoute>
-										<PasswordChangePage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/:id/badges"
-								element={
-									<PrivateRoute>
-										<MyBadgesPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/:id/badgeSetting"
-								element={
-									<PrivateRoute>
-										<BadgeSetiingPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/:id/following"
-								element={
-									<PrivateRoute>
-										<FollowingPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/:id/follower"
-								element={
-									<PrivateRoute>
-										<FollowerPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/edit/interest"
-								element={
-									<PrivateRoute>
-										<InterestTagsPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="profile/:id/myblocks"
-								element={
-									<PrivateRoute>
-										<MyFeedPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="todolist"
-								element={
-									<PrivateRoute>
-										<TodoListPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="feed"
-								element={
-									<PrivateRoute>
-										<FeedPage />
-									</PrivateRoute>
-								}
-							>
-								<Route path="following" element={<FollowingFeedListPage />} />
-								<Route
-									path="recommended"
-									element={<RecommendedFeedListPage />}
-								/>
-							</Route>
-							<Route
-								path="addFeed"
-								element={
-									<PrivateRoute>
-										<AddFeedPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="feed/:id"
-								element={
-									<PrivateRoute>
-										<DetailFeedPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="feed/reactionList"
-								element={
-									<PrivateRoute>
-										<ReactionListPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route
-								path="search"
-								element={
-									<PrivateRoute>
-										<SearchPage />
-									</PrivateRoute>
-								}
-							/>
-							<Route path="feedEdit/:id" element={<EditFeedPage />} />
+							path="profile/edit/password"
+							element={<PasswordChangePage />}
+						/>
+						<Route path="profile/:id/badges" element={<MyBadgesPage />} />
+						<Route
+							path="profile/:id/badgeSetting"
+							element={<BadgeSetiingPage />}
+						/>
+						<Route path="profile/:id/following" element={<FollowingPage />} />
+						<Route path="profile/:id/follower" element={<FollowerPage />} />
+						<Route
+							path="profile/edit/interest"
+							element={<InterestTagsPage />}
+						/>
+						<Route path="profile/:id/myblocks" element={<MyFeedPage />} />
+						<Route path="todolist" element={<TodoListPage />} />
+						<Route path="feed" element={<FeedPage />}>
+							<Route path="following" element={<FollowingFeedListPage />} />
+							<Route path="recommended" element={<RecommendedFeedListPage />} />
 						</Route>
+						<Route path="addFeed" element={<AddFeedPage />} />
+						<Route path="feed/:id" element={<DetailFeedPage />} />
+						<Route path="feed/reactionList" element={<ReactionListPage />} />
+						<Route path="search" element={<SearchPage />} />
+						<Route path="feedEdit/:id" element={<EditFeedPage />} />
 					</Routes>
 				</Suspense>
 			</BrowserRouter>
